@@ -2,25 +2,25 @@
     <header>
         <p class="header__myprofile">Мой профиль</p>
         <div class="header__info">
-            <div class="header__rating info__item">
-                <p>Рейтинг: <span>{{ userInfo.rating }}</span></p>
-                <div class="rating__stars">
-                    <img src="../assets/stars.png" alt="Звездочки" width="126px" height="18px">
-                </div>
+          <div class="header__rating info__item">
+            <p>Рейтинг: <span>{{ userInfo.rating }}</span></p>
+            <div class="rating__stars">
+              <img src="../assets/stars.png" alt="Звездочки" width="126px" height="18px">
             </div>
-            <div class="header__reviews info__item">
-                <p>Отзывов: <span>{{ userInfo.reviews }}</span></p>
-            </div>
-            <div class="header__transactions info__item">
-                <p><span id="item__text">Cделок:</span>
-                    Продаж: <span>{{ userInfo.sales }}</span>
-                    Покупок: <span>{{ userInfo.buy }}</span>
-                </p>
-            </div>
+          </div>
+          <div class="header__reviews info__item">
+            <p>Отзывов: <span>{{ userInfo.reviews }}</span></p>
+          </div>
+          <div class="header__transactions info__item">
+            <p><span id="item__text">Cделок:</span>
+              Продаж: <span>{{ userInfo.sales }}</span>
+              Покупок: <span>{{ userInfo.buy }}</span>
+            </p>
+          </div>
         </div>
     </header>
 </template>
-<script>
+<!--<script>
 import Stars from "@/components/Stars.vue";
 export default {
     props: {
@@ -28,10 +28,19 @@ export default {
             type: Object,
         }
     },
-    components: { Stars }
 };
+</script>-->
+<script setup>
+const props = defineProps({
+  userInfo:{
+    type: Object,
+    required:true,
+  }
+})
+
 </script>
 <style scoped>
+
 header {
     display: flex;
     align-items: center;

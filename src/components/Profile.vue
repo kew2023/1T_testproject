@@ -1,4 +1,4 @@
-<template lang="">
+<template lang="html">
     <div class="profile">
             <div class="profile__header">
                 <img class="profile__icon" src="../assets/icon.png" alt="Икон">
@@ -14,7 +14,7 @@
                 <p class="register__date">25 ноября 2022, в 11:33</p>
             </div>
             <nav>
-                <div class="nav__item" id="nav1">Сделки</div>
+              <router-link to="/order" id="nav1"  class="nav__item">Сделки</router-link>
                 <div class="nav__item" id="nav2">Объявления</div>
                 <div class="nav__item active" id="nav3">Отзывы</div>
                 <div class="nav__item" id="nav4">Редактировать профиль</div>
