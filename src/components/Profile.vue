@@ -29,6 +29,7 @@ export default {
 </script>
 <style scoped>
 .profile {
+    height: 100%;
     width: 320px;
     padding: 25px;
     border-radius: 20px;
@@ -41,6 +42,7 @@ export default {
 .profile__header {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .profile__icon {
@@ -65,6 +67,7 @@ export default {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-bottom: 10px;
 }
 
 .profile__status {
@@ -122,6 +125,7 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-bottom: 20px;
 }
 
 .profile__register {
@@ -131,6 +135,7 @@ export default {
     padding-left: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .register__info {
@@ -233,8 +238,9 @@ nav>.active {
 
     .profile__info {
         margin-left: 15px;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
     }
 
     .profile__name {

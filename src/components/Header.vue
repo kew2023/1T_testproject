@@ -35,6 +35,7 @@ export default {
 header {
     display: flex;
     align-items: center;
+    margin-bottom: 45px;
 }
 
 .header__myprofile {
@@ -58,7 +59,7 @@ header {
     margin-left: 15px;
     color: #7D7781;
     display: inline-flex;
-    padding: 0px 20px;
+    padding: 17px 20px;
     align-items: center;
     gap: 10px;
     border-radius: 20px;
@@ -97,7 +98,7 @@ header {
         margin-left: 15px;
         color: #7D7781;
         display: inline-flex;
-        padding: 0px 20px;
+        padding: 12px 20px;
         align-items: center;
         gap: 10px;
         border-radius: 20px;
