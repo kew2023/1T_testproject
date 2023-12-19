@@ -1,10 +1,10 @@
-<template lang="html">
-    <div class="main__review">
+<template land="html">
+    <div v-for="review of props.reviews" :key="review.id" class="main__review">
         <img src="../assets/icon.png" alt="" class="review__logo">
         <div class="review__info">
             <div class="review__top">
-                <p class="review__userName">SomeUser</p>
-                <p class="review__type">World of Warcraft, 84.00 ₸</p>
+                <p class="review__userName">Пользователь{{ review.id }}</p>
+                <p class="review__type">World of Warcraft, {{ Math.round(Math.random() * 1000) }} ₸</p>
                 <div class="review__rating">
                     <p class="rating__text">Этот месяц</p>
                     <img src="../assets/stars.png" alt="" class="review__rating_score">
@@ -12,24 +12,28 @@
 
             </div>
             <div class="review__disctiption">
-                Хороший продавец, быстро отправил голду, так еще и камня накинул)
+                {{ getThreeWords(review.body) }}
             </div>
+
 
         </div>
 
+        <ReviewModal :style="{ color: white }" :review="review" />
     </div>
 </template>
-<script>
-export default {
-    name: "Review"
-}
+<script setup>
+import ReviewModal from '@/components/V-ReviewModal.vue';
 
+const props = defineProps(['reviews']);
+
+const getThreeWords = (s) => {
+    return s.split(' ').slice(0, 3).join(' ');
+}
 
 </script>
 <style lang="css" scoped>
 .main__review {
     display: flex;
-    width: 97%;
     height: 65px;
     flex-shrink: 0;
     border-radius: 20px;
@@ -120,11 +124,9 @@ export default {
 }
 
 
-@media (max-width: 1919px) {
-}
+@media (max-width: 1919px) {}
 
-@media (max-width: 1279px) {
-}
+@media (max-width: 1279px) {}
 
 @media (max-width: 1023px) {}
 </style>

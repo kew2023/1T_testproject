@@ -7,8 +7,8 @@
             <Profile></Profile>
             <div class="main__container">
                 <div class="main__line"></div>
-                <div class="main__title">Отзывы</div>
-                <div class="main__author">
+                <div class="main__title" @click="() => { getPost(0); countReviews = 5 }">Отзывы</div>
+                <div class="main__author" v-if="reviews.length > 0">
                     <img src="./assets/icon.png" alt="" class="author__logo">
                     <div class="author__info">
 
@@ -23,14 +23,18 @@
                             <div class="filter__title">Фильтр рейтинга</div>
                             <select class="filter__list" name="filter" id="0">
                                 <option value="1">Все отзывы или от 1 до 5</option>
-                                <option value="1"></option>
-                                <option value="1"></option>
+                                <option value="2">Вариант 2</option>
+                                <option value="3">Вариант 3</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="main__reviews">
-                    <Review v-for="review in reviews" :key="review.id" />
+                <div class="main__reviews" v-if="reviews.length > 0">
+                    <Review :reviews="reviews" />
+                </div>
+                <div class="main__noreviews" v-else>Ещё не было отзывов ...</div>
+                <div class="main__button_more" @click="loadMore">
+                    Показать больше отзывов
                 </div>
             </div>
         </main>
@@ -46,10 +50,12 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: Montserrat;
+    font-style: normal;
+    line-height: normal;
 }
 
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
@@ -71,6 +77,8 @@ main {
 .main__container {
     margin-left: 60px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .main__line {
@@ -193,6 +201,25 @@ main {
 }
 
 .main__reviews {}
+
+.main__noreviews {
+    color: #FFF;
+    font-size: 18px;
+}
+
+.main__button_more {
+    display: inline-flex;
+    padding: 23px 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #FF9839;
+    color: var(--ffffff, #FFF);
+    font-size: 16px;
+    font-weight: 600;
+    align-self: center;
+    margin-top: 20px;
+}
 </style>
 
 <script setup>
@@ -201,30 +228,33 @@ import Header from "@/components/Header.vue";
 import Profile from "@/components/Profile.vue";
 import Review from "@/components/V-Review.vue";
 import axios from "axios";
+
 const userInfo = ref({
     rating: 0,
     reviews: 0,
     sales: 0,
     buy: 0,
 });
-getPost(10);
-const reviews = ref([
-    {
-        id: 1,
-        text: 'text1'
-    },
-    {
-        id: 2,
-        text: 'text2'
-    }
-]);
+
+const reviews = ref([]);
+let countReviews = 5;
+getPost(countReviews);
+
+
+
+async function loadMore () {
+    getPost(countReviews);
+    countReviews += 5;
+}
+
 async function getPost (n) {
     try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?limit=5');
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
         reviews.value = response.data.slice(0, n);
         console.log(response);
     } catch (error) {
         console.error(error);
     }
 }
+
 </script>

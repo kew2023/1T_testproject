@@ -21,14 +21,12 @@
     </header>
 </template>
 <script>
-import Stars from "@/components/Stars.vue";
 export default {
     props: {
         userInfo: {
             type: Object,
         }
-    },
-    components: { Stars }
+    }
 };
 </script>
 <style scoped>
