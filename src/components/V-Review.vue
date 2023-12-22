@@ -18,16 +18,22 @@
 
         </div>
     </div>
-    <ReviewModal v-if="showReview.value != -1" :reviews="reviews" :showReview="showReview" />
+    <ReviewModal v-if="showReview > 0" :reviews="reviews" :showReview="showReview" @hideModal="hideModal" />
 </template>
 <script setup>
 import ReviewModal from '@/components/V-ReviewModal.vue';
 import { ref } from 'vue';
 
 const props = defineProps(['reviews']);
+const emits = defineEmits(['hideModal']);
+
+async function hideModal () {
+    showReview.value = -1;
+}
+
 
 const showReview = ref();
-showReview.value = 0;
+showReview.value = -1;
 
 const getThreeWords = (s) => {
     return s.split(' ').slice(0, 3).join(' ');

@@ -1,5 +1,5 @@
 <template>
-    <div class="modal">
+    <div class="modal" @click.self="$emit('hideModal')">
         <div class="content">
             <img src="../assets/icon.png" alt="" class="review__logo">
             <div class="review__info">
@@ -16,7 +16,7 @@
                     {{ selectedReview.body }}
                 </div>
             </div>
-            {{ selectedReview.id }}
+
         </div>
     </div>
 </template>
@@ -24,6 +24,8 @@
 <script setup>
 
 const props = defineProps(['showReview', 'reviews']);
+const emits = defineEmits(['hideModal']);
+
 
 let selectedReview = {};
 for (let review of props.reviews) {
@@ -38,6 +40,7 @@ for (let review of props.reviews) {
     right: 0;
     left: 0;
     bottom: 0;
+    z-index: 10000;
     position: fixed;
     display: flex;
     background: rgba(0, 0, 0, 0.5);
@@ -47,7 +50,7 @@ for (let review of props.reviews) {
 .content {
     margin: auto;
     display: flex;
-    height: 65px;
+    height: 120px;
     flex-shrink: 0;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.02);
@@ -55,6 +58,7 @@ for (let review of props.reviews) {
     box-shadow: 2px 0px 10px 0px rgba(6, 3, 9, 0.05), 30px 25px 48px 8px rgba(6, 3, 9, 0.10);
     backdrop-filter: blur(5px);
     padding: 20px;
+    align-items: center;
 }
 
 .review__logo {
