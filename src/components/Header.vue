@@ -147,5 +147,11 @@ header {
 
 }
 
-@media (max-width: 1023px) {}
+@media (max-width: 1023px) {
+    .header__info {
+        flex-wrap: wrap;
+    }
+
+    .header__rating {}
+}
 </style>

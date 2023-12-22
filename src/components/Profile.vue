@@ -298,5 +298,13 @@ nav>.active {
 
 @media (max-width: 1279px) {}
 
-@media (max-width: 1023px) {}
+@media (max-width: 1023px) {
+    .profile__info {
+        flex-wrap: wrap;
+    }
+
+    .header__rating {
+        flex-basis: 100%;
+    }
+}
 </style>

@@ -237,8 +237,14 @@ const userInfo = ref({
 });
 
 const reviews = ref([]);
+
 let countReviews = 5;
 getPost(countReviews);
+
+
+
+console.log('!!!', reviews.value);
+
 
 
 
@@ -250,8 +256,12 @@ async function loadMore () {
 async function getPost (n) {
     try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        reviews.value = response.data.slice(0, n);
+        reviews.value = [...reviews.value, ...response.data.slice(n - 5, n)];
         console.log(response);
+        console.log(reviews.value);
+        for (let review of reviews.value) {
+            review.price = review?.price ?? Math.round(Math.random() * 1000);
+        }
     } catch (error) {
         console.error(error);
     }

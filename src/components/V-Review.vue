@@ -1,10 +1,10 @@
 <template land="html">
-    <div v-for="review of props.reviews" :key="review.id" class="main__review">
+    <div v-for="review of props.reviews" :key="review.id" class="main__review" @click="showReview = review.id">
         <img src="../assets/icon.png" alt="" class="review__logo">
         <div class="review__info">
             <div class="review__top">
                 <p class="review__userName">Пользователь{{ review.id }}</p>
-                <p class="review__type">World of Warcraft, {{ Math.round(Math.random() * 1000) }} ₸</p>
+                <p class="review__type">World of Warcraft, {{ review.price }} ₸</p>
                 <div class="review__rating">
                     <p class="rating__text">Этот месяц</p>
                     <img src="../assets/stars.png" alt="" class="review__rating_score">
@@ -17,14 +17,17 @@
 
 
         </div>
-
-        <ReviewModal :style="{ color: white }" :review="review" />
     </div>
+    <ReviewModal v-if="showReview.value != -1" :reviews="reviews" :showReview="showReview" />
 </template>
 <script setup>
 import ReviewModal from '@/components/V-ReviewModal.vue';
+import { ref } from 'vue';
 
 const props = defineProps(['reviews']);
+
+const showReview = ref();
+showReview.value = 0;
 
 const getThreeWords = (s) => {
     return s.split(' ').slice(0, 3).join(' ');
