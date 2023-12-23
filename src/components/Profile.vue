@@ -1,11 +1,13 @@
 <template lang="html5">
     <div class="profile">
-        <div class="profile__header">
-            <img class="profile__icon" src="../assets/icon.png" alt="Икон">
+        <div class="profile__header" >
+            <router-link to='/profile'>
+                <img class="profile__icon" src="../assets/icon.png" alt="Икон">
+            </router-link>
             <div class="profile__info">
                 <p class="profile__name">Ivan_Mazepa</p>
-                <p class="profile__status online">Онлайн</p>
-                <p class="profile__status offline" style="display: none;">Офлайн</p>
+                <p class="profile__status" :class="{ 'online': online, 'offline': !online }" @click="online = !online; n = (n+1)%2 ">{{statusText[n]}}</p>
+                <p class="profile__status" style = "display:none">Офлайн</p>
             </div>
         </div>
         <p class="profile__description">Продажа голды WOW 24/7</p>
@@ -14,20 +16,20 @@
             <p class="register__date">25 ноября 2022, в 11:33</p>
         </div>
         <nav>
-            <router-link to='/transactions' active-class="active" class="nav__item" id="nav1" @click="activeId = 0">Сделки</router-link>
-            <router-link to='/ads' active-class="active" class="nav__item" id="nav2" @click="activeId = 1">Объявления</router-link>
-            <router-link to='/reviews' active-class="active" class="nav__item" id="nav3" @click="activeId = 2">Отзывы</router-link>
-            <router-link to='/profile' active-class="active" class="nav__item" id="nav4" @click="activeId = 3">Редактировать профиль
-            </router-link>
-            <router-link to='/exit' active-class="active" class="nav__item exit" id="nav5" @click="activeId = 4"> Выйти</router-link>
+            <router-link to='/transactions' active-class="active" class="nav__item" id="nav1" >Сделки</router-link>
+            <router-link to='/ads' active-class="active" class="nav__item" id="nav2" >Объявления</router-link>
+            <router-link to='/reviews' active-class="active" class="nav__item" id="nav3" >Отзывы</router-link>
+            <router-link to='/profile' active-class="active" class="nav__item" id="nav4" >Редактировать профиль</router-link>
+            <router-link to='/exit' active-class="active" class="nav__item exit" id="nav5" > Выйти</router-link>
         </nav>
     </div>
 </template>
 
 <script setup lang="js">
 import { ref } from 'vue';
-
-const activeId = ref(2);
+let online = ref(true);
+let n = 0;
+const statusText = ['Онлайн', 'Офлайн']
 
 </script>
 <style scoped>
@@ -43,9 +45,11 @@ const activeId = ref(2);
 }
 
 .profile__header {
+    text-decoration: none;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    cursor: default;
 }
 
 .profile__icon {
