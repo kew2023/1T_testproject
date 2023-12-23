@@ -5,7 +5,7 @@
             <div class="review__info">
                 <div class="review__top">
                     <p class="review__userName">Пользователь{{ selectedReview.id }}</p>
-                    <p class="review__type">World of Warcraft, {{ Math.round(Math.random() * 1000) }} ₸</p>
+                    <p class="review__type">World of Warcraft, {{ selectedReview.price }} ₸</p>
                     <div class="review__rating">
                         <p class="rating__text">Этот месяц</p>
                         <img src="../assets/stars.png" alt="" class="review__rating_score">

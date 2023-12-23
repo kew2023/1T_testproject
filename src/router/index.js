@@ -5,6 +5,11 @@ import Reviews from '../views/Reviews.vue';
 
 const routes = [
   {
+    path: '/',
+    name: 'Home',
+    component: Reviews
+  },
+  {
     path: '/transactions',
     name: 'Transactions',
     component: Reviews

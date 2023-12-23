@@ -1,7 +1,7 @@
 <template lang="">
     <div class="main__container">
         <div class="main__line"></div>
-        <div class="main__title" @click="() => { reviews.length = 0; countReviews = 5 }">Отзывы</div>
+        <div class="main__title" @click="() => { reviews.length = 0; countReviews = 0 }">Отзывы</div>
         <div class="main__author" v-if="reviews.length > 0">
             <img src="../assets/icon.png" alt="" class="author__logo">
             <div class="author__info">
@@ -188,7 +188,7 @@ async function getPost (n) {
 
 .filter__list option {
     background: rgba(255, 255, 255, 0.08);
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 .main__reviews {}
