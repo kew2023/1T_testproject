@@ -1,5 +1,5 @@
 <template lang="html5">
-    <div class="profile">
+    <div class="profile" @click.capture = "showMenu">
         <div class="profile__header" >
             <router-link to='/profile'>
                 <img class="profile__icon" src="../assets/icon.png" alt="Икон">
@@ -7,19 +7,21 @@
             <div class="profile__info">
                 <p class="profile__name">Ivan_Mazepa</p>
                 <p class="profile__status" :class="{ 'online': online, 'offline': !online }" @click="online = !online; n = (n+1)%2 ">{{statusText[n]}}</p>
-                <p class="profile__status" style = "display:none">Офлайн</p>
             </div>
         </div>
         <p class="profile__description">Продажа голды WOW 24/7</p>
-        <div class="profile__register">
-            <p class="register__info">Регистрация: <span>Месяц назад</span> </p>
+        <div class="linebreak"></div>
+        <div class="profile__register" v-if="showMode">
+            <div class="register__info">
+                <span>Регистрация: </span><span>Месяц назад</span>
+            </div>
             <p class="register__date">25 ноября 2022, в 11:33</p>
         </div>
-        <nav>
+        <nav class ="profile__nav" v-if="showMode">
             <router-link to='/transactions' active-class="active" class="nav__item" id="nav1" >Сделки</router-link>
             <router-link to='/ads' active-class="active" class="nav__item" id="nav2" >Объявления</router-link>
             <router-link to='/reviews' active-class="active" class="nav__item" id="nav3" >Отзывы</router-link>
-            <router-link to='/profile' active-class="active" class="nav__item" id="nav4" >Редактировать профиль</router-link>
+            <router-link to='/profile' active-class="active" class="nav__item" id="nav4" >Редактировать <span>профиль</span></router-link>
             <router-link to='/exit' active-class="active" class="nav__item exit" id="nav5" > Выйти</router-link>
         </nav>
     </div>
@@ -29,13 +31,20 @@
 import { ref } from 'vue';
 let online = ref(true);
 let n = 0;
-const statusText = ['Онлайн', 'Офлайн']
+const statusText = ['Онлайн', 'Офлайн'];
+let showMode = ref(true);
+
+async function showMenu () {
+
+    if (window.innerWidth < 1024) showMode = !showMode;
+}
+
 
 </script>
+
 <style scoped>
 .profile {
     height: 100%;
-    width: 320px;
     padding: 25px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -69,20 +78,14 @@ const statusText = ['Онлайн', 'Офлайн']
 
 .profile__name {
     color: #FFFFFF;
-    font-family: Montserrat;
     font-size: 18px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     margin-bottom: 10px;
 }
 
 .profile__status {
-    font-family: Montserrat;
     font-size: 12px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .online,
@@ -127,11 +130,8 @@ const statusText = ['Онлайн', 'Офлайн']
 
 .profile__description {
     color: #7D7781;
-    font-family: Montserrat;
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
     margin-bottom: 20px;
 }
 
@@ -150,21 +150,14 @@ const statusText = ['Онлайн', 'Офлайн']
     color: #7D7781;
     font-family: Montserrat;
     font-size: 12px;
-    font-style: normal;
     font-weight: 500;
     line-height: 26px;
-}
-
-.register__info span {
-    display: inline;
 }
 
 .register__date {
     display: block;
     color: #FFF;
-    font-family: Montserrat;
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
     line-height: 26px;
 }
@@ -186,15 +179,18 @@ nav {
     text-decoration-line: none;
 
     color: #7D7781;
-    font-family: Montserrat;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
+
 
 .nav__item::before {
     margin-right: 15px;
+}
+
+.nav__item span {
+    display: inline-block;
+    margin-left: 8px;
 }
 
 nav>.active {
@@ -233,7 +229,6 @@ nav>.active {
 @media (max-width: 1919px) {
 
     .profile {
-        width: 234px;
         padding: 20px;
     }
 
@@ -261,39 +256,23 @@ nav>.active {
 
 
     .profile__description {
-        color: #7D7781;
-        font-family: Montserrat;
         font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
     }
 
     .profile__register {
-        border-radius: 15px;
-        background: rgba(14, 9, 19, 0.50);
-        padding-left: 15px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        margin-bottom: 15px;
     }
 
     .register__info {
         font-size: 12px;
-        line-height: 20px;
     }
 
     .register__info span {
-        display: inline;
+        display: block;
     }
 
     .register__date {
-        display: block;
-        color: #FFF;
-        font-family: Montserrat;
         font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 26px;
     }
 
     .nav__item {
@@ -304,7 +283,62 @@ nav>.active {
     }
 }
 
-@media (max-width: 1279px) {}
+@media (max-width: 1279px) {
+    .profile {
+        max-width: 190px;
+    }
 
-@media (max-width: 1023px) {}
+    .profile__info {
+        margin-left: 10px;
+    }
+
+    .profile__register {
+        padding-top: 10px;
+        padding-left: 15px;
+        padding-bottom: 10px;
+    }
+
+    .register__date {
+        font-size: 14px;
+    }
+
+    .nav__item {
+        width: 160px;
+    }
+
+    .nav__item span {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .profile {
+        max-width: none;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .profile__header {
+        margin-bottom: 0px;
+    }
+
+    .profile__info {
+        padding-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    .profile__description {
+        margin-bottom: 0px;
+        word-wrap: break-word;
+    }
+
+    .profile .linebreak {
+        width: 100%;
+    }
+
+}
 </style>

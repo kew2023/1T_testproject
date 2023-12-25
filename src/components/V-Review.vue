@@ -5,6 +5,7 @@
             <div class="review__top">
                 <p class="review__userName">Пользователь{{ review.id }}</p>
                 <p class="review__type">World of Warcraft, {{ review.price }} ₸</p>
+                <div class="linebreak"></div>
                 <div class="review__rating">
                     <p class="rating__text">Этот месяц</p>
                     <img src="../assets/stars.png" alt="" class="review__rating_score">
@@ -12,7 +13,7 @@
 
             </div>
             <div class="review__disctiption">
-                {{ getThreeWords(review.body) }}
+                {{ getThreeWords(review.body) }} ...
             </div>
 
 
@@ -43,7 +44,7 @@ const getThreeWords = (s) => {
 <style lang="css" scoped>
 .main__review {
     display: flex;
-    height: 65px;
+    min-height: 65px;
     flex-shrink: 0;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -99,6 +100,11 @@ const getThreeWords = (s) => {
     line-height: normal;
 }
 
+
+.main__review .linebreak {
+    display: none;
+}
+
 .review__rating {
     display: flex;
     align-items: end;
@@ -133,9 +139,61 @@ const getThreeWords = (s) => {
 }
 
 
-@media (max-width: 1919px) {}
+@media (max-width: 1919px) {
+    .review__userName {
+        font-size: 16px;
+    }
 
-@media (max-width: 1279px) {}
+    .review__type {
+        font-size: 12px;
+    }
+
+    .rating__text {
+        font-size: 12px;
+    }
+
+    .review__disctiption {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1279px) {
+
+    .review__top {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .review__userName {
+        font-size: 16px;
+    }
+
+    .review__type {
+        font-size: 12px;
+    }
+
+    .main__review .linebreak {
+        display: block;
+        width: 100%;
+    }
+
+    .review__rating {
+        margin-top: 10px;
+        margin-left: 0px;
+    }
+
+    .rating__text {
+        font-size: 12px;
+    }
+
+    .review__disctiption {
+        font-size: 14px;
+    }
+
+    .review__disctiption #text {
+        font-size: 2px;
+    }
+}
 
 @media (max-width: 1023px) {}
 </style>

@@ -6,15 +6,16 @@
                 <div class="review__top">
                     <p class="review__userName">Пользователь{{ selectedReview.id }}</p>
                     <p class="review__type">World of Warcraft, {{ selectedReview.price }} ₸</p>
+                    <div class="linebreak"></div>
                     <div class="review__rating">
                         <p class="rating__text">Этот месяц</p>
                         <img src="../assets/stars.png" alt="" class="review__rating_score">
                     </div>
 
                 </div>
-                <div class="review__disctiption">
+                <p class="review__disctiption">
                     {{ selectedReview.body }}
-                </div>
+                </p>
             </div>
 
         </div>
@@ -35,12 +36,15 @@ for (let review of props.reviews) {
 </script>
 
 <style lang="css" scoped>
+.modal .linebreak {
+    display: none;
+}
+
 .modal {
+    width: 100vw;
+    height: 100%;
     top: 0;
-    right: 0;
     left: 0;
-    bottom: 0;
-    z-index: 10000;
     position: fixed;
     display: flex;
     background: rgba(24, 24, 24, 0.5);
@@ -48,9 +52,10 @@ for (let review of props.reviews) {
 }
 
 .content {
+    max-width: 90vw;
     margin: auto;
     display: flex;
-    height: 120px;
+    min-height: 120px;
     flex-shrink: 0;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.02);
@@ -88,22 +93,16 @@ for (let review of props.reviews) {
 
 .review__userName {
     color: #FFF;
-    font-family: Montserrat;
     font-size: 18px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 
     margin-right: 20px;
 }
 
 .review__type {
     color: #FF9839;
-    font-family: Montserrat;
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .review__rating {
@@ -115,11 +114,8 @@ for (let review of props.reviews) {
 .rating__text {
     color: #7D7781;
     text-align: right;
-    font-family: Montserrat;
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
     margin-right: 20px;
 }
 
@@ -131,11 +127,68 @@ for (let review of props.reviews) {
 
 .review__disctiption {
     color: #7D7781;
-    font-family: Montserrat;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
     line-height: 28px;
+    word-wrap: normal;
     /* 175% */
 }
+
+@media (max-width: 1919px) {
+    .review__userName {
+        font-size: 16px;
+    }
+
+    .review__type {
+        font-size: 12px;
+    }
+
+    .rating__text {
+        font-size: 12px;
+    }
+
+    .review__disctiption {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1279px) {
+
+    .review__top {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .review__userName {
+        font-size: 16px;
+    }
+
+    .review__type {
+        font-size: 12px;
+    }
+
+    .modal .linebreak {
+        display: block;
+        width: 100%;
+    }
+
+    .review__rating {
+        margin-top: 10px;
+        margin-left: 0px;
+    }
+
+    .rating__text {
+        font-size: 12px;
+    }
+
+    .review__disctiption {
+        font-size: 14px;
+    }
+
+    .review__disctiption #text {
+        font-size: 2px;
+    }
+}
+
+@media (max-width: 1023px) {}
 </style>

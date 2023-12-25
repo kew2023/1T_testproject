@@ -3,17 +3,19 @@
         <div class="main__line"></div>
         <div class="main__title" @click="() => { reviews.length = 0; countReviews = 0 }">Отзывы</div>
         <div class="main__author" v-if="reviews.length > 0">
-            <img src="../assets/icon.png" alt="" class="author__logo">
-            <div class="author__info">
-
-                <div class="info__container">
-                    <div class="author__name">Ivan Mazepa</div>
-                    <div class="author__rating">
-                        <img src="../assets/stars.png" alt="">
+            <div class="author__bar">
+                <img src="../assets/icon.png" alt="" class="author__logo">
+                <div class="author__info">
+                    <div class="info__container">
+                        <div class="author__name">Ivan Mazepa</div>
+                        <div class="author__rating">
+                            <img src="../assets/stars.png" alt="">
+                        </div>
                     </div>
-                </div>
                 <div class="author__text">50 отзывов за 1 месяц</div>
-                <div class="author__filter">
+            </div>
+            </div>
+            <div class="author__filter">
                     <div class="filter__title">Фильтр рейтинга</div>
                     <select class="filter__list" name="filter" id="0">
                         <option value="1">Все отзывы или от 1 до 5</option>
@@ -21,7 +23,6 @@
                         <option value="3">Вариант 3</option>
                     </select>
                 </div>
-            </div>
         </div>
         <div class="main__reviews" v-if="reviews.length > 0">
             <Review :reviews="reviews" />
@@ -83,7 +84,6 @@ async function getPost (n) {
 
 .main__title {
     color: #FFF;
-    font-family: Montserrat;
     font-size: 25px;
     font-style: normal;
     font-weight: 700;
@@ -114,6 +114,10 @@ async function getPost (n) {
     backdrop-filter: blur(5px);
 }
 
+.author__bar {
+    display: flex;
+}
+
 .author__info {
     width: 100%;
     display: flex;
@@ -128,19 +132,14 @@ async function getPost (n) {
 
 .author__name {
     color: #FFF;
-    font-family: Montserrat;
     font-size: 18px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
     margin-bottom: 10px;
 }
 
 .author__text {
     color: #FFCE4F;
-    font-family: Montserrat;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
     line-height: 28px;
     padding-bottom: 10px;
@@ -165,6 +164,9 @@ async function getPost (n) {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    right: -20px;
+    bottom: -5px;
+    position: relative;
 }
 
 .filter__list {
@@ -175,9 +177,8 @@ async function getPost (n) {
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 2px 0px 10px 0px rgba(6, 3, 9, 0.05), 30px 25px 48px 8px rgba(6, 3, 9, 0.10);
-    backdrop-filter: blur(5px);
     color: #FFF;
-    font-family: Montserrat;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -210,5 +211,90 @@ async function getPost (n) {
     font-weight: 600;
     align-self: center;
     margin-top: 20px;
+}
+
+@media (max-width: 1919px) {
+
+    .main__container {
+        margin-left: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main__title {
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .main__author {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .author__bar {
+        display: flex;
+    }
+
+    .author__info {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info__container {
+        margin-right: 20px;
+    }
+
+    .author__name {
+        font-size: 16px;
+    }
+
+    .author__text {
+        font-size: 14px;
+        position: relative;
+        top: -2px;
+        /* 175% */
+    }
+
+    .author__filter {
+        margin-top: 20px;
+    }
+
+    .filter__list {
+        height: 55px;
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 1279px) {
+    .main__container {
+        position: relative;
+        top: -20px;
+    }
+
+    .main__line {
+        width: 75vw;
+        position: absolute;
+        left: -236px;
+    }
+
+}
+
+@media (max-width: 1023px) {
+    .main__container {
+        margin-left: 0;
+    }
+
+    .main__line {
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        top: -122px;
+    }
+
 }
 </style>

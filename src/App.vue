@@ -23,15 +23,17 @@
     font-family: Montserrat;
     font-style: normal;
     line-height: normal;
+    word-wrap: normal;
 }
 
 #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    padding-left: 130px;
     padding-top: 130px;
-    padding-right: 130px;
+
+    background: repeat-y url("./assets/sparks.png") #120C17;
+
 }
 
 main {
@@ -39,9 +41,42 @@ main {
 }
 
 .container {
-    max-width: 1920px;
+    width: 77%;
     margin: 0 auto;
 
+}
+
+@media (max-width: 1919px) {
+    #app {
+        padding-top: 112px;
+
+    }
+}
+
+@media (max-width: 1279px) {
+    #app {
+        padding-top: 95px;
+
+    }
+}
+
+@media (max-width: 1023px) {
+    #app {
+        padding-top: 145px;
+
+    }
+
+    main {
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+
+    .container {
+        margin: 0 auto;
+        padding: 20px;
+        width: 90%;
+    }
 }
 </style>
 
