@@ -1,15 +1,17 @@
 <template lang="html5">
-    <div class="profile" @click.capture = "showMenu">
-        <div class="profile__header" >
-            <router-link to='/profile'>
-                <img class="profile__icon" src="../assets/icon.png" alt="Икон">
-            </router-link>
-            <div class="profile__info">
-                <p class="profile__name">Ivan_Mazepa</p>
-                <p class="profile__status" :class="{ 'online': online, 'offline': !online }" @click="online = !online; n = (n+1)%2 ">{{statusText[n]}}</p>
+    <div class="profile" >
+        <div class="profile__wrapper" @click = "showMenu">
+            <div class="profile__header" >
+                <router-link to='/profile'>
+                    <img class="profile__icon" src="../assets/icon.png" alt="Икон">
+                </router-link>
+                <div class="profile__info">
+                    <p class="profile__name">Ivan_Mazepa</p>
+                    <p class="profile__status" :class="{ 'online': online, 'offline': !online }" @click="online = !online; n = (n+1)%2 ">{{statusText[n]}}</p>
+                </div>
             </div>
+            <p class="profile__description">Продажа голды WOW 24/7</p>
         </div>
-        <p class="profile__description">Продажа голды WOW 24/7</p>
         <div class="linebreak"></div>
         <div class="profile__register" v-if="showMode">
             <div class="register__info">
@@ -51,6 +53,13 @@ async function showMenu () {
     background: rgba(255, 255, 255, 0.03);
     box-shadow: 2px 0px 10px 0px rgba(6, 3, 9, 0.05), 30px 25px 48px 8px rgba(6, 3, 9, 0.10);
     backdrop-filter: blur(5px);
+}
+
+.profile__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .profile__header {
@@ -125,7 +134,7 @@ async function showMenu () {
     color: #b42d2d;
     background-color: #b42d2d;
     margin-right: 10px;
-    box-shadow: 0px 0px 5px 4px rgba(41, 194, 38, 0.20);
+    box-shadow: 0px 0px 5px 4px rgba(194, 38, 38, 0.2);
 }
 
 .profile__description {
