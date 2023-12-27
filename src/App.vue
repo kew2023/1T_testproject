@@ -4,8 +4,8 @@
         </Header>
 
         <main>
-            <Profile></Profile>
-            <router-view />
+            <Profile :user="userInfo"></Profile>
+            <router-view @edit="editUser()" />
 
         </main>
         <!--<nav>
@@ -84,12 +84,20 @@ main {
 import { ref } from "vue";
 import Header from "@/components/Header.vue";
 import Profile from "@/components/Profile.vue";
+import ProfileView from "@/views/ProfileView.vue";
 
 const userInfo = ref({
     rating: 0,
     reviews: 0,
     sales: 0,
     buy: 0,
+    name: "Ivan_Mazepa",
+    description: "Продажа голды WOW 24/7",
 });
+
+const editUser = (user) => {
+    userInfo.value.name = user.name;
+    userInfo.value.description = user.description;
+}
 
 </script>

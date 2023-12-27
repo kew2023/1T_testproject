@@ -1,16 +1,17 @@
 <template lang="html5">
     <div class="profile" >
-        <div class="profile__wrapper" @click = "showMenu">
+        <div class="profile__wrapper" @click.prevent = "showMenu">
             <div class="profile__header" >
                 <router-link to='/profile'>
                     <img class="profile__icon" src="../assets/icon.png" alt="Икон">
                 </router-link>
                 <div class="profile__info">
-                    <p class="profile__name">Ivan_Mazepa</p>
+                    <p class="profile__name">{{props.user.name}}</p>
                     <p class="profile__status" :class="{ 'online': online, 'offline': !online }" @click="online = !online; n = (n+1)%2 ">{{statusText[n]}}</p>
                 </div>
             </div>
-            <p class="profile__description">Продажа голды WOW 24/7</p>
+            <p class="profile__description">{{props.user.description}}</p>
+            <i class="fa-solid fa-chevron-down profile__arrow" style="color:#7D7781; font-size: 18px;"></i>
         </div>
         <div class="linebreak"></div>
         <div class="profile__register" v-if="showMode">
@@ -29,16 +30,19 @@
     </div>
 </template>
 
-<script setup lang="js">
+<script setup>
 import { ref } from 'vue';
 let online = ref(true);
 let n = 0;
 const statusText = ['Онлайн', 'Офлайн'];
 let showMode = ref(true);
 
-async function showMenu () {
+const props = defineProps(['user']);
 
-    if (window.innerWidth < 1024) showMode = !showMode;
+function showMenu () {
+
+    if (window.innerWidth < 1024) showMode.value = !showMode.value;
+    else showMode.value = true;
 }
 
 
@@ -53,13 +57,6 @@ async function showMenu () {
     background: rgba(255, 255, 255, 0.03);
     box-shadow: 2px 0px 10px 0px rgba(6, 3, 9, 0.05), 30px 25px 48px 8px rgba(6, 3, 9, 0.10);
     backdrop-filter: blur(5px);
-}
-
-.profile__wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
 }
 
 .profile__header {
@@ -90,6 +87,10 @@ async function showMenu () {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+.profile__arrow {
+    display: none;
 }
 
 .profile__status {
@@ -331,6 +332,13 @@ nav>.active {
         flex-wrap: wrap;
     }
 
+    .profile__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
     .profile__header {
         margin-bottom: 0px;
     }
@@ -345,9 +353,19 @@ nav>.active {
         word-wrap: break-word;
     }
 
+    .profile__arrow {
+        display: block;
+    }
+
+
+    .profile__register,
+    .profile__nav,
     .profile .linebreak {
         width: 100%;
     }
 
+    .nav__item {
+        width: 97%;
+    }
 }
 </style>
