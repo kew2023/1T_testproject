@@ -32,6 +32,7 @@
 
 <script setup>
 import { ref } from 'vue';
+
 let online = ref(true);
 let n = 0;
 const statusText = ['Онлайн', 'Офлайн'];

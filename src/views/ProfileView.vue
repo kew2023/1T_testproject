@@ -12,12 +12,11 @@
 
             <div class="input">
                 <div class="input__title">Описание</div>
-                <input type="text" class="main__input" :value="user.discription"
-                    @input="event => user.discription = event.target.value">
+                <input type="text" class="main__input" v-model="user.discription">
             </div>
         </div>
 
-        <div class="main__button_complete" @click="editProfile()">
+        <div class="main__button_complete" @click="editProfile">
             Применить
         </div>
 
@@ -25,6 +24,9 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex';
+
+const store = useStore();
 
 const user = {
     name: '',
@@ -32,11 +34,13 @@ const user = {
 };
 
 const editProfile = () => {
-    console.log(123);
-    user.name = '';
-    user.discription = '';
-}
+    store.commit('setUserName', user.name);
+    store.commit('setUserDiscription', user.discription);
+    console.log(store.state.user);
+};
 
+
+store;
 </script>
 
 <style lang="css" scoped>

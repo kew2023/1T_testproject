@@ -81,23 +81,21 @@ main {
 </style>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Header from "@/components/Header.vue";
 import Profile from "@/components/Profile.vue";
-import ProfileView from "@/views/ProfileView.vue";
+import { useStore } from "vuex";
+
+
+const store = useStore();
 
 const userInfo = ref({
     rating: 0,
     reviews: 0,
     sales: 0,
     buy: 0,
-    name: "Ivan_Mazepa",
-    description: "Продажа голды WOW 24/7",
+    name: computed(() => store.getters.getUserName),
+    description: computed(() => store.getters.getUserDiscription),
 });
-
-const editUser = (user) => {
-    userInfo.value.name = user.name;
-    userInfo.value.description = user.description;
-}
 
 </script>
